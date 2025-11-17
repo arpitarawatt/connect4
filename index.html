@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect 4 Game</title>
+  <link rel="stylesheet" href="connect4.css">
+</head>
+<body>
+
+  <!-- 🎮 Start Page -->
+  <div id="start-page" class="overlay active">
+    <div class="start-box">
+      <h1>🎯 CONNECT 4 🎯</h1>
+      <p class="rules">
+        Drop your colored discs into the grid. <br>
+        The first player to connect four discs vertically, horizontally, or diagonally wins!
+      </p>
+      <button id="start-btn">Start Game</button>
+    </div>
+  </div>
+
+  <!-- 🧩 Game Board -->
+  <div id="game-container" class="hidden">
+
+    <h2 id="whosturn">Red's Turn</h2>
+
+    <div id="turn-indicator">
+      <div class="turn-ball" id="red-ball"></div>
+      <div class="turn-ball" id="yellow-ball"></div>
+    </div>
+
+    <div class="board">
+      <ul class="column" id="c1">
+        <p id="c1r6"></p><p id="c1r5"></p><p id="c1r4"></p><p id="c1r3"></p><p id="c1r2"></p><p id="c1r1"></p>
+      </ul>
+      <ul class="column" id="c2">
+        <p id="c2r6"></p><p id="c2r5"></p><p id="c2r4"></p><p id="c2r3"></p><p id="c2r2"></p><p id="c2r1"></p>
+      </ul>
+      <ul class="column" id="c3">
+        <p id="c3r6"></p><p id="c3r5"></p><p id="c3r4"></p><p id="c3r3"></p><p id="c3r2"></p><p id="c3r1"></p>
+      </ul>
+      <ul class="column" id="c4">
+        <p id="c4r6"></p><p id="c4r5"></p><p id="c4r4"></p><p id="c4r3"></p><p id="c4r2"></p><p id="c4r1"></p>
+      </ul>
+      <ul class="column" id="c5">
+        <p id="c5r6"></p><p id="c5r5"></p><p id="c5r4"></p><p id="c5r3"></p><p id="c5r2"></p><p id="c5r1"></p>
+      </ul>
+      <ul class="column" id="c6">
+        <p id="c6r6"></p><p id="c6r5"></p><p id="c6r4"></p><p id="c6r3"></p><p id="c6r2"></p><p id="c6r1"></p>
+      </ul>
+      <ul class="column" id="c7">
+        <p id="c7r6"></p><p id="c7r5"></p><p id="c7r4"></p><p id="c7r3"></p><p id="c7r2"></p><p id="c7r1"></p>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 🏆 Winner Popup -->
+  <div id="winner-popup" class="overlay">
+    <div class="popup-box">
+
+      <h2 id="winner-text">Red Wins!</h2>
+      <button id="replay-btn">Play Again</button>
+    </div>
+  </div>
+  <canvas id="confetti-canvas"></canvas>
+
+
+  <script src="./connect4.js"></script>
+
+  <script>
+    // Simple script for start and winner popup (no game logic touched)
+    document.getElementById("start-btn").addEventListener("click", () => {
+      document.getElementById("start-page").classList.remove("active");
+      document.getElementById("game-container").classList.remove("hidden");
+    });
+
+    // // Override alert to show popup (so your JS doesn't need to change) //   here no confetti emoji and red wins or yellow wins in small not caps
+    // window.alert = (msg) => {
+    //   document.getElementById("winner-text").innerText = msg;
+    //   document.getElementById("winner-popup").classList.add("active");
+    // };
+
+    // Override alert to show popup with bold, uppercase, and confetti
+  window.alert = (msg) => {
+    const textElement = document.getElementById("winner-text");
+    const winnerPopup = document.getElementById("winner-popup");
+
+  // Make text uppercase + add confetti emojis
+  textElement.innerText = `🎉 ${msg.toUpperCase()}! 🎉`;
+  
+  // Show popup
+  winnerPopup.classList.add("active");
+
+  document.getElementById("confetti-canvas").style.display = "block";
+  startConfetti();   // NEW
+
+};
+
+
+    document.getElementById("replay-btn").addEventListener("click", () => {
+      location.reload();
+    });
+
+
+
+</script>
+
+
+</body>
+</html>
